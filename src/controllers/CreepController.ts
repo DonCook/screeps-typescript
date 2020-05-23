@@ -2,14 +2,19 @@ import {harvesterRole, upgraderRole} from "../roles/index";
 import {Roles} from "../models/creeps/Roles";
 import {SpawnNames} from "../models/spawns/SpawnNames";
 import {creepService} from "../services/index";
-import CreepRole from "../roles/CreepRole";
+import CreepRoleInterface from "../roles/CreepRoleInterface";
 
 const POPULATION: {[role: string]: number} = {
-    [Roles.HARVESTER_ROLE]: 1,
-    [Roles.UPGRADER_ROLE]: 3,
+    [Roles.HARVESTER_ROLE]: 8,
+    [Roles.UPGRADER_ROLE]: 5,
 };
 
 export class CreepController {
+
+    private roles: CreepRoleInterface[] = [
+        harvesterRole,
+        upgraderRole,
+    ];
 
     clearMemory(): void {
         // Automatically delete memory of missing creeps
@@ -22,21 +27,31 @@ export class CreepController {
 
     populate(): void {
 
-        function populateRole(role: Roles, creepRole: CreepRole) {
-            if (creepService.getAllByRole(role).length < POPULATION[role]) {
-                creepRole.create(Game.spawns[SpawnNames.SPAWN1]);
+        function populateRole(creepRole: CreepRoleInterface, replacements?: CreepRoleInterface[]) {
+            if (creepService.getAllByRole(creepRole.getRole()).length < POPULATION[creepRole.getRole()]) {
+                if (
+                    creepRole.create(Game.spawns[SpawnNames.SPAWN1]) === ERR_NOT_ENOUGH_RESOURCES
+                    && replacements && replacements.length
+                ) {
+                    for (const replacement of replacements) {
+                        const creepReplacement = creepService.getAllByRole(replacement.getRole())[0];
+
+                        if (creepReplacement) creepReplacement.memory.role = creepRole.getRole();
+                    }
+                }
             }
         }
 
-        populateRole(Roles.HARVESTER_ROLE, harvesterRole);
-        populateRole(Roles.UPGRADER_ROLE, upgraderRole);
+        populateRole(harvesterRole, [upgraderRole]);
+        populateRole(upgraderRole);
     }
 
     runAll(): void {
         creepService.getAll().forEach(creep => {
 
-            if (creepService.getRole(creep) === Roles.HARVESTER_ROLE) harvesterRole.run(creep);
-            else if (creepService.getRole(creep) === Roles.UPGRADER_ROLE) upgraderRole.run(creep);
+            for (const creepRole of this.roles) {
+                if (creepService.getRole(creep) === creepRole.getRole()) creepRole.run(creep);
+            }
         });
     }
 }

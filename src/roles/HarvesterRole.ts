@@ -3,8 +3,9 @@ import {Skills} from "../models/creeps/Skills";
 import RoleTask from "./RoleTask";
 import {creepService} from "../services/index";
 import CreepRole from "./CreepRole";
+import CreepRoleInterface from "./CreepRoleInterface";
 
-export class HarvesterRole extends CreepRole {
+export class HarvesterRole extends CreepRole implements CreepRoleInterface {
 
     role = Roles.HARVESTER_ROLE;
     tasks = {
@@ -13,7 +14,9 @@ export class HarvesterRole extends CreepRole {
     };
     skills = [
         Skills.MOVE,
+        Skills.MOVE,
         Skills.WORK,
+        Skills.CARRY,
         Skills.CARRY,
     ];
 

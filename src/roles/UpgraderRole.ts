@@ -3,8 +3,9 @@ import {Skills} from "../models/creeps/Skills";
 import {creepService} from "../services/index";
 import CreepRole from "./CreepRole";
 import RoleTask from "./RoleTask";
+import CreepRoleInterface from "./CreepRoleInterface";
 
-export default class UpgraderRole extends CreepRole {
+export default class UpgraderRole extends CreepRole implements CreepRoleInterface {
 
     role = Roles.UPGRADER_ROLE;
     skills = [
