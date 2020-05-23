@@ -1,6 +1,9 @@
 import {Roles} from "../models/creeps/Roles";
+import CreepTaskService from "./CreepTaskService";
 
 export default class CreepService {
+
+    tasks: CreepTaskService = new CreepTaskService();
 
     isFull(creep: Creep, resource: ResourceConstant): boolean {
         return creep.store[resource] >= creep.store.getCapacity()

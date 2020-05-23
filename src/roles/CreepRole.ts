@@ -2,7 +2,6 @@ import RoleTask from "./RoleTask";
 import {Skills} from "../models/creeps/Skills";
 import {Roles} from "../models/creeps/Roles";
 import {creepBuilder} from "../builders/index";
-import CreepRoleInterface from "./CreepRoleInterface";
 
 export default abstract class CreepRole {
 
@@ -15,6 +14,9 @@ export default abstract class CreepRole {
     }
 
     public create(spawn: StructureSpawn): ScreepsReturnCode {
+
+        console.log("Create a new Creep", {spawn, role: this.role, skills: this.skills});
+
         return creepBuilder.build(spawn, this.role, this.skills);
     }
 

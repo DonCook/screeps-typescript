@@ -5,7 +5,7 @@ import {creepService} from "../services/index";
 import CreepRoleInterface from "../roles/CreepRoleInterface";
 
 const POPULATION: {[role: string]: number} = {
-    [Roles.HARVESTER_ROLE]: 8,
+    [Roles.HARVESTER_ROLE]: 7,
     [Roles.UPGRADER_ROLE]: 5,
 };
 
@@ -15,15 +15,6 @@ export class CreepController {
         harvesterRole,
         upgraderRole,
     ];
-
-    clearMemory(): void {
-        // Automatically delete memory of missing creeps
-        for (const name in Memory.creeps) {
-            if (!(name in Game.creeps)) {
-                delete Memory.creeps[name];
-            }
-        }
-    }
 
     populate(): void {
 
