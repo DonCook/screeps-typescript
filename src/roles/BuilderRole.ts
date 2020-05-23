@@ -1,8 +1,11 @@
 import CreepRole from "./CreepRole";
 import CreepRoleInterface from "./CreepRoleInterface";
 import {creepService} from "../services/index";
+import {Roles} from "../models/creeps/Roles";
 
 export default class BuilderRole extends CreepRole implements CreepRoleInterface {
+
+    role = Roles.BUILDER_ROLE;
 
     run(creep: Creep): void {
 

@@ -1,4 +1,4 @@
-import {Roles} from "../models/creeps/Roles";
+import {Roles} from "../../models/creeps/Roles";
 import CreepTaskService from "./CreepTaskService";
 
 export default class CreepService {

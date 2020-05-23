@@ -26,4 +26,8 @@ export default abstract class CreepRole {
             creep.memory.task = task.name;
         }
     }
+
+    public assimilateCreep(creep: Creep) {
+        creep.memory.role = this.getRole();
+    }
 }

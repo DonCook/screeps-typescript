@@ -3,4 +3,5 @@ export enum Roles {
 
     HARVESTER_ROLE = "harvester",
     UPGRADER_ROLE = "upgrader",
+    BUILDER_ROLE = "builder",
 }

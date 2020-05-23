@@ -5,4 +5,5 @@ export default interface CreepRoleInterface {
     getRole(): Roles
     create(spawn: StructureSpawn): ScreepsReturnCode
     run(creep: Creep): void
+    assimilateCreep(creep: Creep): void
 }

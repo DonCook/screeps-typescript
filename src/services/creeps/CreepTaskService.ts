@@ -1,4 +1,4 @@
-import RoleTask from "../roles/RoleTask";
+import RoleTask from "../../roles/RoleTask";
 
 export default class CreepTaskService {
     protected tasks: {[taskName: string]: RoleTask} = {

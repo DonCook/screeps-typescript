@@ -1,13 +1,12 @@
 import {ErrorMapper} from "utils/ErrorMapper";
-import {creepController, memoryController} from "./controllers/index";
+import {creepController, memoryController, populationController} from "./controllers/index";
+import {SpawnNames} from "./models/spawns/SpawnNames";
 
 export const loop = ErrorMapper.wrapLoop(() => {
 
-    console.log(`Current game tick is ${Game.time}`);
-
     memoryController.clearDeadCreeps();
 
-    creepController.populate();
+    populationController.populateAll();
 
     creepController.runAll();
 });
